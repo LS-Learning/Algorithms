@@ -3,13 +3,25 @@
 import argparse
 
 def find_max_profit(prices):
-  pass
+    # base case/initial max
+    max_profit = prices[1] - prices[0]
+    print(max_profit)
 
+    # loop through all numbers
+    for i in range(3, len(prices)+1):
+        print(i)
+        # create temp list
+        temp_list = prices[:i]
+        print(temp_list)
 
-if __name__ == '__main__':
-  # This is just some code to accept inputs from the command line
-  parser = argparse.ArgumentParser(description='Find max profit from prices.')
-  parser.add_argument('integers', metavar='N', type=int, nargs='+', help='an integer price')
-  args = parser.parse_args()
+        # loop through temp_list, in reverse
+        for x in range(1, len(temp_list), -1):
+          profit = temp_list[-1] - temp_list[x-1]
+          print(x, profit)
+          if profit > max_profit:
+            max_profit = profit
+    
+    return max_profit
 
-  print("A profit of ${profit} can be made from the stock prices {prices}.".format(profit=find_max_profit(args.integers), prices=args.integers))
+l = [10, 7, 5, 8, 11, 9]
+print(find_max_profit(l))
